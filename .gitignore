@@ -1,0 +1,12 @@
+# virtualenv
+bin/
+include/
+lib/
+.Python
+
+# os
+.DS_Store
+
+# python
+*.py[o|c]
+

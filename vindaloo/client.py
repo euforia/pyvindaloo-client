@@ -42,7 +42,12 @@ class BaseClient(object):
         return resp.json()
 
     def __loadCreds(self):
-        fh = open(os.environ['HOME'] + "/.vindaloo/credentials", "r")
+        credsfile = os.environ['HOME'] + "/.vindaloo/credentials"
+        if !os.exists(credsfile):
+            print "Creds file not found: %s" % (credsfile)
+            exit(2)
+        
+        fh = open(credsfile, "r")
         jcreds = json.load(fh)
         fh.close()
 

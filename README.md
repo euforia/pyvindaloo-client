@@ -2,14 +2,26 @@ pyvindaloo-client
 =================
 Python vindaloo client
 
+Usage
+-----
+Start by creating a credentials file in your home directory under `~/.vindaloo/credentials` similar to the contents shown below.
 
-Example:
+    {
+        "auth": {
+            "username": "...",
+            "password": "..."
+        }
+    }
+
+You can now start using the api. Here's a simple example:
 
 ```
 # client connecting to localhost
 client = Client()
+
 # or 
-# new client connecting to a hostname
+
+# client connecting to a hostname
 client = Client("foo.bar")
 
 print client.GetConfig()

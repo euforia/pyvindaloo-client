@@ -2,6 +2,16 @@ pyvindaloo-client
 =================
 Python vindaloo client
 
+Requirements:
+
+    Python >= 2.6
+    Potentially internet access (for dependencies)
+
+Installation
+------------
+
+    pip install git+https://github.com/euforia/pyvindaloo-client.git
+
 Usage
 -----
 Start by creating a credentials file in your home directory under `~/.vindaloo/credentials` similar to the contents shown below.

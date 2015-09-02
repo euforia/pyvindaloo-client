@@ -15,11 +15,11 @@ class BaseClient(object):
         self.__base_url = "http://%s:%d" % (host, port)
 
         self.creds = self.__loadCreds()
-        self.config = self.__getConfig()
+        self.config = self.GetConfig()
         
         self.api_url = "%s/%s" % (self.__base_url, self.config["api_prefix"])
 
-    def __getConfig(self):
+    def GetConfig(self):
         resp = requests.get("%s/config" % (self.__base_url))
         return resp.json()
 

@@ -2,7 +2,8 @@ pyvindaloo-client
 =================
 Python vindaloo client
 
-Requirements:
+Requirements
+------------
 
     Python >= 2.6
     Potentially internet access (for dependencies)

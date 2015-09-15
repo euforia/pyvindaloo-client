@@ -3,6 +3,7 @@ import sys
 import fnmatch
 from setuptools import setup, find_packages
 
+VERSION = "0.0.1"
 DESCRIPTION = "Resource inventory system"
 LONG_DESCRIPTION = '''
 System to store and query arbitrary data such config, infrastructure inventory .etc.
@@ -17,8 +18,8 @@ AUTHOR_EMAIL = "euforia@gmail.com"
 
 setup(
     name='vindalu',
-    version=metrilyx.version,
-    url='https://github.com/vindalu',
+    version=VERSION,
+    url='https://github.com/vindalu/py-vindalu-client',
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
     author=AUTHOR,

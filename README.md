@@ -1,4 +1,4 @@
-pyvindalu-client
+py-vindalu-client
 =================
 Python vindalu client
 

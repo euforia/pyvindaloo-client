@@ -1,6 +1,6 @@
-pyvindaloo-client
+pyvindalu-client
 =================
-Python vindaloo client
+Python vindalu client
 
 Requirements
 ------------
@@ -11,11 +11,11 @@ Requirements
 Installation
 ------------
 
-    pip install git+https://github.com/euforia/pyvindaloo-client.git
+    pip install git+https://github.com/euforia/pyvindalu-client.git
 
 Usage
 -----
-Start by creating a credentials file in your home directory under `~/.vindaloo/credentials` similar to the contents shown below.
+Start by creating a credentials file in your home directory under `~/.vindalu/credentials` similar to the contents shown below.
 
     {
         "auth": {

@@ -16,9 +16,9 @@ AUTHOR = "euforia"
 AUTHOR_EMAIL = "euforia@gmail.com"
 
 setup(
-    name='vindaloo',
+    name='vindalu',
     version=metrilyx.version,
-    url='https://github.com/euforia/vindaloo',
+    url='https://github.com/vindalu',
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
     author=AUTHOR,

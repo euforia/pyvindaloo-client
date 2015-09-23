@@ -11,7 +11,7 @@ Requirements
 Installation
 ------------
 
-    pip install git+https://github.com/euforia/pyvindalu-client.git
+    pip install git+https://github.com/vindalu/py-vindalu-client.git
 
 Usage
 -----
@@ -30,14 +30,14 @@ You can now start using the api. Here's a simple example:
 # client connecting to localhost
 client = Client()
 
-# or 
+# or
 
 # client connecting to a hostname
 client = Client("foo.bar")
 
-print client.GetConfig()
+print client.get_config()
 
-print client.GetTypes()
+print client.get_types()
 
 # Available methods
 print dir(client)

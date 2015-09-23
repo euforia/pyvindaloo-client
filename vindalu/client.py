@@ -12,18 +12,18 @@ class Creds(object):
 class BaseClient(object):
 
     def __init__(self, host="localhost", port=5454):
-        self.__base_url = "http://%s:%d" % (host, port)
+        self._base_url = "http://%s:%d" % (host, port)
 
-        self.creds = self._loadCreds()
-        self.config = self.GetConfig()
+        self.creds = self._load_creds()
+        self.config = self.get_config()
 
-        self.api_url = "%s/%s" % (self.__base_url, self.config["api_prefix"])
+        self.api_url = "%s/%s" % (self._base_url, self.config["api_prefix"])
 
-    def GetConfig(self):
-        resp = requests.get("%s/config" % (self.__base_url))
+    def get_config(self):
+        resp = requests.get("%s/config" % (self._base_url))
         return resp.json()
 
-    def _doRequest(self, method, endpoint, params=None, data=None):
+    def _request(self, method, endpoint, params=None, data=None):
         req_url = "%s/%s" % (self.api_url, endpoint)
 
         if method in ("POST", "PUT", "DELETE"):
@@ -34,7 +34,7 @@ class BaseClient(object):
         resp = requests.request(method, req_url, auth=auth, params=params, data=data)
         return resp.json()
 
-    def _loadCreds(self):
+    def _load_creds(self):
         credsfile = os.environ['HOME'] + "/.vindalu/credentials"
         if !os.exists(credsfile):
             print "Creds file not found: %s" % (credsfile)
@@ -52,39 +52,38 @@ class BaseClient(object):
 
 class Client(BaseClient):
 
-    def Get(self, atype, _id, version=0):
+    def get(self, atype, _id, version=0):
         if version > 0:
-            obj = self._doRequest("GET", "/%s/%s" % (atype, _id), params={"version": version})
+            obj = self._request("GET", "/%s/%s" % (atype, _id), params={"version": version})
         else:
-            obj = self._doRequest("GET", "/%s/%s" % (atype, _id))
+            obj = self._request("GET", "/%s/%s" % (atype, _id))
 
         return Asset(obj["id"], obj["type"], obj["timestamp"], data=obj["data"])
 
 
-    def GetVersions(self, atype, _id, diff=False):
+    def get_version(self, atype, _id, diff=False):
         if diff:
-            return self._doRequest("GET", "/%s/%s/versions?diff" % (atype, _id))
+            return self._request("GET", "/%s/%s/versions?diff" % (atype, _id))
         else:
-            objs = self._doRequest("GET", "/%s/%s/versions" % (atype, _id))
+            objs = self._request("GET", "/%s/%s/versions" % (atype, _id))
             return [ Asset(obj["id"], obj["type"], obj["timestamp"], data=obj["data"])
                 for obj in objs ]
 
-    def ListTypeProperties(self, atype):
-        return self._doRequest("GET", "/%s/properties" % (atype))
+    def list_type_properties(self, atype):
+        return self._request("GET", "/%s/properties" % (atype))
 
-    def GetTypes(self):
-        jobj = self._doRequest("GET", "/")
+    def get_type(self):
+        jobj = self._request("GET", "/")
         return [ TypeCount(**j) for j in jobj ]
 
-
-    def Create(self, atype, _id, data):
+    def create(self, atype, _id, data):
         jdata = json.dumps(data)
-        return self._doRequest("POST", "/%s/%s" % (atype, _id), data=jdata)
+        return self._request("POST", "/%s/%s" % (atype, _id), data=jdata)
 
-    def Update(self, atype, _id, data):
+    def update(self, atype, _id, data):
         jdata = json.dumps(data)
-        return self._doRequest("PUT", "/%s/%s" % (atype, _id), data=jdata)
+        return self._request("PUT", "/%s/%s" % (atype, _id), data=jdata)
 
-    def Delete(self, atype, id):
-        return self._doRequest("DELETE", "/%s/%s" % (atype, id))
+    def delete(self, atype, id):
+        return self._request("DELETE", "/%s/%s" % (atype, id))
 

@@ -75,7 +75,7 @@ class BaseClient(object):
     def _load_creds(self):
         credsfile = os.environ['HOME'] + "/.vindalu/credentials"
         if not os.path.exists(credsfile):
-            print "Creds file not found: %s" % (credsfile)
+            log.error("Creds file not found: %s" % (credsfile))
             exit(2)
 
         fh = open(credsfile, "r")
@@ -130,7 +130,7 @@ class Client(BaseClient):
     def delete(self, atype, _id):
         return self._request("DELETE", "/%s/%s" % (atype, _id))
 
-
+    # This function will fetch all records for the given asset type
     def get_type(self, atype, version=0):
         if version > 0:
             obj = self._request("GET", "/%s" % (atype), params={"version": version})
@@ -150,6 +150,10 @@ class Client(BaseClient):
         jdata = json.dumps(data)
         return self._request("PUT", "/%s" % (atype), data=jdata)
 
-    def delete_type(self, atype):
-        return self._request("DELETE", "/%s" % (atype))
+    # Purposefully not implemented
+    # def delete_type(self, atype):
+    #    return self._request("DELETE", "/%s" % (atype))
+
+    def raw(self, method, endpoint, params=None, data=None):
+        return self._request(method, endpoint, params, data)
 
